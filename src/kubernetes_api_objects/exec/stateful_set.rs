@@ -142,8 +142,8 @@ impl StatefulSetSpec {
     }
 
     #[verifier(external_body)]
-    pub fn service_name(&self) -> (service_name: String)
-        ensures self@.service_name == service_name@,
+    pub fn service_name(&self) -> (service_name: Option<String>)
+        ensures service_name is Some ==> service_name->0@ == self@.service_name,
     {
         self.inner.service_name.clone()
     }
@@ -200,7 +200,7 @@ impl StatefulSetSpec {
     pub fn set_service_name(&mut self, service_name: String)
         ensures self@ == old(self)@.with_service_name(service_name@),
     {
-        self.inner.service_name = service_name
+        self.inner.service_name = Some(service_name)
     }
 
     #[verifier(external_body)]

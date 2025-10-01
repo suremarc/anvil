@@ -151,7 +151,7 @@ impl ConfigMapVolumeSource {
     pub fn set_name(&mut self, name: String)
         ensures self@ == old(self)@.with_name(name@),
     {
-        self.inner.name = Some(name);
+        self.inner.name = name;
     }
 }
 
@@ -194,7 +194,7 @@ impl ConfigMapProjection {
     pub fn set_name(&mut self, name: String)
         ensures self@ == old(self)@.with_name(name@),
     {
-        self.inner.name = Some(name);
+        self.inner.name = name;
     }
 
     #[verifier(external_body)]
@@ -210,7 +210,7 @@ impl SecretProjection {
     pub fn set_name(&mut self, name: String)
         ensures self@ == old(self)@.with_name(name@),
     {
-        self.inner.name = Some(name);
+        self.inner.name = name;
     }
 
     #[verifier(external_body)]

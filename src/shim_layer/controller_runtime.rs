@@ -17,7 +17,7 @@ use deps_hack::kube::{
     },
     Client, CustomResourceExt,
 };
-use deps_hack::kube_core::{ErrorResponse, NamespaceResourceScope};
+use deps_hack::kube::core::{ErrorResponse, NamespaceResourceScope};
 use deps_hack::serde::{de::DeserializeOwned, Serialize};
 use deps_hack::tracing::{error, info, warn};
 use deps_hack::Error;
@@ -120,7 +120,7 @@ where
     // Get the custom resource by a quorum read to Kubernetes' storage (etcd) to get the most updated custom resource
     let get_cr_resp = cr_api.get(&cr_name).await;
     match get_cr_resp {
-        Err(deps_hack::kube_client::error::Error::Api(ErrorResponse { reason, .. }))
+        Err(deps_hack::kube::error::Error::Api(ErrorResponse { reason, .. }))
             if &reason == "NotFound" =>
         {
             warn!(

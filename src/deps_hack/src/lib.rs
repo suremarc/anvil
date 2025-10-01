@@ -4,9 +4,6 @@ pub use chrono;
 pub use futures;
 pub use k8s_openapi;
 pub use kube;
-pub use kube_client;
-pub use kube_core;
-pub use kube_derive;
 pub use proptest;
 pub use rand;
 pub use schemars;
@@ -409,7 +406,7 @@ impl VStatefulSetSpec {
     // instead of creating a new wrapper type for VStatefulSetSpec.
     pub fn to_native(&self) -> k8s_openapi::api::apps::v1::StatefulSetSpec {
         k8s_openapi::api::apps::v1::StatefulSetSpec {
-            service_name: self.service_name.clone(),
+            service_name: Some(self.service_name.clone()),
             selector: self.selector.clone(),
             template: self.template.clone(),
             replicas: self.replicas.clone(),
